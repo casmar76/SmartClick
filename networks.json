@@ -10,36 +10,6 @@
     ]
   },
   {
-    "name": "Affbay",
-    "parameters": [
-      "subid",
-      "subid2",
-      "subid3",
-      "subid4",
-      "subid5"
-    ]
-  },
-  {
-    "name": "Ambalaya",
-    "parameters": [
-      "sub1",
-      "sub2",
-      "sub3",
-      "sub4",
-      "sub5"
-    ]
-  },
-  {
-    "name": "BlitzAds",
-    "parameters": [
-      "s1",
-      "s2",
-      "s3",
-      "s4",
-      "s5"
-    ]
-  },
-  {
     "name": "Buygoods",
     "parameters": [
       "subid",
@@ -58,16 +28,6 @@
     ]
   },
   {
-    "name": "Clickdealer",
-    "parameters": [
-      "s1",
-      "s2",
-      "s3",
-      "s4",
-      "s5"
-    ]
-  },
-  {
     "name": "Digistore24",
     "parameters": [
       "sid1",
@@ -76,24 +36,6 @@
       "sid4",
       "sid5",
       "cid"
-    ]
-  },
-  {
-    "name": "Dr.Cash",
-    "parameters": [
-      "sub1",
-      "sub2",
-      "sub3",
-      "sub4",
-      "sub5"
-    ]
-  },
-  {
-    "name": "Gasmobi",
-    "parameters": [
-      "sub_id1",
-      "sub_id2",
-      "sub_id3"
     ]
   },
   {
@@ -107,26 +49,7 @@
     ]
   },
   {
-    "name": "HealthTrader",
-    "parameters": [
-      "subid_one",
-      "subid_two",
-      "subid_three",
-      "click_id"
-    ]
-  },
-  {
     "name": "LeadRock",
-    "parameters": [
-      "sub1",
-      "sub2",
-      "sub3",
-      "sub4",
-      "sub5"
-    ]
-  },
-  {
-    "name": "LeadReaktor",
     "parameters": [
       "sub1",
       "sub2",
@@ -153,32 +76,12 @@
     ]
   },
   {
-    "name": "MoreNiche",
-    "parameters": [
-      "sub1",
-      "sub2",
-      "sub3",
-      "sub4",
-      "sub5"
-    ]
-  },
-  {
     "name": "Nutriprofits",
     "parameters": [
       "param",
       "param_2",
       "param_3",
       "param_4"
-    ]
-  },
-  {
-    "name": "SellHealth",
-    "parameters": [
-      "t1",
-      "t2",
-      "t3",
-      "t4",
-      "t5"
     ]
   },
   {
@@ -198,16 +101,6 @@
       "utm_campaign",
       "utm_content",
       "utm_term"
-    ]
-  },
-  {
-    "name": "TerraLeads",
-    "parameters": [
-      "sub_id",
-      "sub_id_1",
-      "sub_id_2",
-      "sub_id_3",
-      "sub_id_4"
     ]
   }
 ]
