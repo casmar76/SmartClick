@@ -39,6 +39,16 @@
     ]
   },
   {
+    "name": "Dr.Cash",
+    "parameters": [
+      "sub1",
+      "sub2",
+      "sub3",
+      "sub4",
+      "sub5"
+    ]
+  },
+  {
     "name": "Gurumedia",
     "parameters": [
       "sub1",
@@ -76,6 +86,16 @@
     ]
   },
   {
+    "name": "MoreNiche",
+    "parameters": [
+      "sub1",
+      "sub2",
+      "sub3",
+      "sub4",
+      "sub5"
+    ]
+  },
+  {
     "name": "Nutriprofits",
     "parameters": [
       "param",
@@ -101,6 +121,16 @@
       "utm_campaign",
       "utm_content",
       "utm_term"
+    ]
+  },
+  {
+    "name": "TerraLeads",
+    "parameters": [
+      "sub_id",
+      "sub_id_1",
+      "sub_id_2",
+      "sub_id_3",
+      "sub_id_4"
     ]
   }
 ]
