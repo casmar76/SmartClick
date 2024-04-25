@@ -20,14 +20,6 @@
     ]
   },
   {
-    "name": "Clickbank",
-    "parameters": [
-      "tid_1",
-      "tid_2",
-      "tid_3"
-    ]
-  },
-  {
     "name": "Digistore24",
     "parameters": [
       "sid1",
