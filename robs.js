@@ -1,6 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
     (function () {
         const urlParams = new URLSearchParams(window.location.search);
+		const scriptTag = document.currentScript;
+		const originUrl = scriptTag.getAttribute('data-origin-url');
         
         // Function to replace spaces with '_s_', dashes with '_d_', and remove slashes
         const replaceSpacesAndDashes = (inputString) =>
@@ -57,8 +59,8 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 			
 			// Send the click ID to the server
-            if (adCampaignId) {
-                const ajaxUrl = `${window.location.origin}/wp-admin/admin-ajax.php?action=track_click`;
+            if (adCampaignId && originUrl) {
+                const ajaxUrl = `${originUrl}/wp-admin/admin-ajax.php?action=track_click`;
                 fetch(ajaxUrl, {
                     method: 'POST',
                     headers: {
