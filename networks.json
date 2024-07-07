@@ -20,6 +20,24 @@
     ]
   },
   {
+	  "name": "Clickbank V8.0",
+	  "parameters": [
+		"traffic_type",
+		"traffic_source",
+		"offer",
+		"campaign",
+		"adgroup",
+		"ad",
+		"creative",
+		"aff_sub1",
+		"aff_sub2",
+		"aff_sub3",
+		"aff_sub4",
+		"aff_sub5",
+		"extclid"
+	  ]
+	},
+  {
     "name": "Digistore24",
     "parameters": [
       "sid1",
