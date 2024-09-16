@@ -9,7 +9,7 @@ no construtor de URL , em qual opção coloco o gclid?	Se Não estiver determina
 Após subir as conversões para a planilha, elas atualizam na hora os dados para a conta? Ou esse processo costuma durar mais de um dia?	o Google diz que pode levar até 48 horas, porém depois de umas 3-4 horas já costuma aparecer.	chat_bot_smart_click	editorial:chat_bot_smart_click
 Sou português e vivo em Portugal a planilha Google sheets tem a timezone para inserir na minha conta Google o fuso horário aparece + 01:00 é assim que coloco na planilha certo ?	no seu caso vai ficar: Parameters:TimeZone=+0100 (na linha 6 coluna A em vermelho).	chat_bot_smart_click	editorial:chat_bot_smart_click
 minha chave instalada estava em um domínio que venceu e a hospedagem também porém para renovar esta muito mais caro, aderir outra hospedagem porém essa chave diz que está instalada em outro domínio como posso resolver isso? Por favor passe os seus dados que iremos verificar.	chat_bot_smart_click	editorial:chat_bot_smart_click
-Can you fart?	I don't have a body.	chat_bot_smart_click	editorial:chat_bot_smart_click
+Da pra pega o gclid lá no relatório do super pressel tbm?	Dá sim, o glcid encontra-se lá disponível.	chat_bot_smart_click	editorial:chat_bot_smart_click
 Do you breathe	I don't have a body.	chat_bot_smart_click	editorial:chat_bot_smart_click
 Can you get tired?	I don't have a body.	chat_bot_smart_click	editorial:chat_bot_smart_click
 Can you yawn?	I don't have a body.	chat_bot_smart_click	editorial:chat_bot_smart_click
