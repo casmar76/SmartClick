@@ -12,7 +12,7 @@ Question	Answer
 "Da pra pegar o gclid lá no relatório do super pressel também?"	"Dá sim, o glcid encontra-se lá disponível."
 "Para atualizar o smartclick, tenho que desinstalar conforme é ensinado no módulo (Desinstalando corretamente o seu smartclick)?"	"Não, você pode atualizar diretamente do WordPress na parte de plugins."
 "Fiz o procedimento para remover a licença de um domínio para levar para um subdomínio. Infelizmente está acontecendo um erro. Quando coloco meu email e o código da licença. Consegue me ajudar? Já desativei o plugin e desinstalei, mas não deu certo."	"Por favor desative a licença antes de desativar o Smart Click que deve funcionar."
-"meus pixels tao com status "inativo. Como faz pra deixar ativo?"	"Assim que você fizer vendas e subir as conversões eles mudam o status pra ativo"
+"meus pixels tao com status inativo. Como faz pra deixar ativo?"	"Assim que você fizer vendas e subir as conversões eles mudam o status pra ativo"
 "Vc sabe o motivo de não ter vindo o Gclid na notificação ?"	"Tem uma série de variáveis, tem que rever as configurações para ver se está tudo certo e ainda pode ter sido uma venda por cookie ou pode ter sido um IOS blindado, daí não tem como recuperar."
 "Meu Telegram não dá opção de escolher o som, somente habilitar ou desabilitar, o que pode ser?"	"Por favor instale o aplicativo no computador e não a versão web, pois essa função está apenas no aplicativo, ou faça pelo celular."
 "Quando preencho a planilha fica dando erro de horároio, diz que a hora do click não pode ser antes da conversão, o que pdoe ser?"	"Por favor sempre utilize o horário da notificação que você recebeu e ajuste o fuso-horário na planilha com o fuso horário da sua conta do Google Ads."
