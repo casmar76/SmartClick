@@ -1,12 +1,7 @@
 [
   {
-    "title": "Google Integration has been gone",
-    "date": "2024-11-21 15:40",
+    "title": "Integração com o Google não está mais ativo",
+    "date": "2024-11-25 15:40",
     "short_desc": "Google integration has been deprecated since Smart Click v3.0; Instead, use the Export option inside Reports page"
   },
-  {
-    "title": "Google Integration has been gone",
-    "date": "2024-11-21 15:40",
-    "short_desc": "Google integration has been deprecated since Smart Click v3.0; Instead, use the Export option inside Reports page"
-  }
 ]
