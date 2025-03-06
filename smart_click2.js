@@ -1,27 +1,29 @@
 document.addEventListener('DOMContentLoaded', () => {
     (function () {
         const urlParams = new URLSearchParams(window.location.search);
-		const scriptTag = document.querySelector('script[data-origin-url]');
-		const originUrl = scriptTag ? scriptTag.getAttribute('data-origin-url') : null;
-        
+        const scriptTag = document.querySelector('script[data-origin-url]');
+        const originUrl = scriptTag ? scriptTag.getAttribute('data-origin-url') : null;
+
         // Function to replace spaces with '_s_', dashes with '_d_', and remove slashes
         const replaceSpacesAndDashes = (inputString) =>
             inputString.replace(/ /g, '_s_').replace(/-/g, '_d_').replace(/\//g, '');
 
-        // Store the gclid in local storage if present in the URL
-        if (urlParams.has('gclid')) {
-            const gclid = urlParams.get('gclid');
-            localStorage.setItem('gclid', gclid);
-        }
+        // Store click IDs in local storage if present in the URL
+        const clickParams = ['gclid', 'wbraid', 'msclkid', 'fbclid', 'tbclid'];
+        clickParams.forEach(param => {
+            if (urlParams.has(param)) {
+                localStorage.setItem(param, urlParams.get(param));
+            }
+        });
 
-        // Retrieve gclid from local storage if not in the URL
-        const gclid = urlParams.get('gclid') || localStorage.getItem('gclid');
+        // Retrieve the first available click ID from URL or local storage
+        const adCampaignId = clickParams
+            .map(param => urlParams.get(param) || localStorage.getItem(param))
+            .find(value => value) || null;
 
-        // Get values of 'gclid', 'wbraid', 'msclkid', or 'fbclid' from the url parameters
-        const adCampaignId = gclid || urlParams.get('wbraid') || urlParams.get('msclkid') || urlParams.get('fbclid');
         let modifiedCampaignId = adCampaignId;
 
-        // If 'tid' parameter exists, replace its value and set it back
+        // If 'tid' parameter exists, replace its value
         if (urlParams.has('tid')) {
             const originalTid = urlParams.get('tid');
             const replacedTid = replaceSpacesAndDashes(originalTid);
@@ -57,8 +59,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Update the href attribute of the link
                 link.href = linkHref + anchorHash;
             });
-			
-			// Send the click ID to the server
+
+            // Send the click ID to the server
             if (adCampaignId && originUrl) {
                 const ajaxUrl = `${originUrl}/wp-admin/admin-ajax.php?action=track_click2`;
                 fetch(ajaxUrl, {
@@ -76,3 +78,4 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     })();
 });
+
