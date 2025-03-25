@@ -16,10 +16,16 @@ document.addEventListener('DOMContentLoaded', () => {
         // Definir o clickId como gclid, wbraid, msclkid ou fbclid (caso existam)
         const adCampaignId = gclid || urlParams.get('wbraid') || urlParams.get('msclkid') || urlParams.get('fbclid');
 
-        // Enviar dados do clickId para o servidor
-        if (originUrl && adCampaignId) {
+        // Determinar se o acesso é orgânico
+        const isOrganic = !adCampaignId;
+
+        // Enviar dados para o servidor
+        if (originUrl) {
             const ajaxUrl = `${originUrl}/wp-admin/admin-ajax.php?action=track_click`;
-            const requestBody = { clickId: adCampaignId };
+            const requestBody = { 
+                clickId: adCampaignId || 'organico', // Envia 'organico' se não houver clickId
+                source: isOrganic ? 'organic' : 'paid'
+            };
 
             console.log("📡 Enviando requisição AJAX para:", ajaxUrl);
             console.log("📦 Dados enviados:", requestBody);
@@ -33,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
             .then(data => console.log("✅ Resposta do servidor:", data))
             .catch(error => console.error("❌ Erro ao enviar requisição:", error));
         } else {
-            console.log("❌ Nenhum clickId disponível para enviar.");
+            console.log("❌ URL de origem não encontrada.");
         }
 
         // Criar a string dos parâmetros de URL atualizada
