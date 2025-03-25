@@ -69,14 +69,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 fetch(ajaxUrl, {
                     method: 'POST',
-                    mode: 'no-cors', // Ignorar a resposta do servidor
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(data),
                 })
-                /* .then(response => response.json())
+                .then(response => response.json())
                 .then(responseData => {
                     console.log("✅ Resposta do servidor:", responseData);
-                }) */
+                })
                 .catch(error => {
                     console.error('❌ Erro ao enviar requisição:', error);
                 });
