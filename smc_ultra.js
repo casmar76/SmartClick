@@ -4,39 +4,40 @@ document.addEventListener('DOMContentLoaded', () => {
         const scriptTag = document.querySelector('script[data-origin-url]');
         const originUrl = scriptTag ? scriptTag.getAttribute('data-origin-url') : null;
 
-        // Função para substituir espaços, hífens e remover barras
-        const replaceSpacesAndDashes = (inputString) =>
-            inputString.replace(/ /g, '_s_').replace(/-/g, '_d_').replace(/\//g, '');
-
-        // Recuperar gclid da URL ou do localStorage
-        const gclid = urlParams.get('gclid') || localStorage.getItem('gclid');
-        if (gclid) {
-            // Se o gclid estiver na URL, armazená-lo no localStorage
+        // Guardar gclid no localStorage se estiver presente na URL
+        if (urlParams.has('gclid')) {
+            const gclid = urlParams.get('gclid');
             localStorage.setItem('gclid', gclid);
-        } else {
-            // Caso contrário, remover do localStorage
-            localStorage.removeItem('gclid');
         }
 
-        // Obter valores do 'gclid', 'wbraid', 'msclkid' ou 'fbclid' dos parâmetros da URL
+        // Recuperar gclid do localStorage caso não esteja na URL
+        const gclid = urlParams.get('gclid') || localStorage.getItem('gclid');
+
+        // Definir o clickId como gclid, wbraid, msclkid ou fbclid (caso existam)
         const adCampaignId = gclid || urlParams.get('wbraid') || urlParams.get('msclkid') || urlParams.get('fbclid');
-        let modifiedCampaignId = adCampaignId;
 
-        // Se o parâmetro 'tid' existir, substituir seu valor e configurá-lo novamente
-        if (urlParams.has('tid')) {
-            const originalTid = urlParams.get('tid');
-            const replacedTid = replaceSpacesAndDashes(originalTid);
-            urlParams.set('tid', replacedTid);
-        }
+        // Enviar dados do clickId para o servidor
+        if (originUrl) {
+            const ajaxUrl = `${originUrl}/wp-admin/admin-ajax.php?action=track_click`;
+            const requestBody = adCampaignId ? { clickId: adCampaignId } : {}; // Se não houver gclid, enviar um objeto vazio
 
-        // Se houver 'adCampaignId' e 'tid', modificar o 'adCampaignId'
-        if (adCampaignId && urlParams.has('tid')) {
-            modifiedCampaignId = replaceSpacesAndDashes(adCampaignId);
+            console.log("📡 Enviando requisição AJAX para:", ajaxUrl);
+            console.log("📦 Dados enviados:", requestBody);
+
+            fetch(ajaxUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(requestBody),
+            })
+            .then(response => response.json())
+            .then(data => console.log("✅ Resposta do servidor:", data))
+            .catch(error => console.error("❌ Erro ao enviar requisição:", error));
         }
 
         // Criar a string dos parâmetros de URL atualizada
         const updatedUrlParamsString = urlParams.toString();
 
+        // Atualizar os links na página com os parâmetros da URL
         if (updatedUrlParamsString) {
             const pageLinks = document.querySelectorAll('a');
 
@@ -44,44 +45,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 const anchorHash = link.hash;
                 let linkHref = link.href.split('#')[0];
 
-                // Substituir os placeholders com o valor de 'modifiedCampaignId'
-                if (modifiedCampaignId) {
-                    linkHref = linkHref.replace('[sclid]', modifiedCampaignId).replace('%5Bsclid%5D', modifiedCampaignId);
-                }
-
-                // Atualizar ou adicionar parâmetros na URL do link
+                // Adicionar ou atualizar os parâmetros na URL do link
                 if (!linkHref.includes('?')) {
                     linkHref += '?' + updatedUrlParamsString;
                 } else {
                     linkHref += '&' + updatedUrlParamsString;
                 }
 
-                // Atualizar o atributo href do link
+                // Atualizar o href do link
                 link.href = linkHref + anchorHash;
             });
-
-            // Enviar o clickId para o servidor se houver um gclid
-            if (gclid && originUrl) {
-                const ajaxUrl = `${originUrl}/wp-admin/admin-ajax.php?action=track_click`;
-                const data = { clickId: gclid };
-
-                console.log("📦 Dados enviados:", data); // Debug
-
-                fetch(ajaxUrl, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(data),
-                })
-                .then(response => response.json())
-                .then(responseData => {
-                    console.log("✅ Resposta do servidor:", responseData);
-                })
-                .catch(error => {
-                    console.error('❌ Erro ao enviar requisição:', error);
-                });
-            } else {
-                console.log("❌ Nenhum gclid disponível para enviar.");
-            }
         }
+
     })();
 });
