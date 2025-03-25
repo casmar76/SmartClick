@@ -30,6 +30,8 @@ document.addEventListener('DOMContentLoaded', () => {
             .catch(error => {
                 console.error('❌ Erro ao enviar requisição:', error);
             });
+        } else {
+            console.log("❌ Nenhum gclid disponível para enviar.");
         }
     })();
 });
