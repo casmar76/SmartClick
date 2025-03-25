@@ -4,18 +4,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const scriptTag = document.querySelector('script[data-origin-url]');
         const originUrl = scriptTag ? scriptTag.getAttribute('data-origin-url') : null;
 
-        // Se a URL não tiver gclid, limpar do localStorage
-        if (!urlParams.has('gclid')) {
-            localStorage.removeItem('gclid');
-        } else {
-            // Se tiver, armazenar no localStorage
-            localStorage.setItem('gclid', urlParams.get('gclid'));
-        }
+        // Pegar o valor de gclid diretamente da URL
+        const gclid = urlParams.get('gclid');
 
-        // Recuperar gclid atualizado
-        const gclid = localStorage.getItem('gclid') || null;
-
-        // Verifica se há um clickId válido antes de enviar
+        // Se gclid estiver presente na URL, enviar os dados para o servidor
         if (gclid && originUrl) {
             const ajaxUrl = `${originUrl}/wp-admin/admin-ajax.php?action=track_click`;
             const data = { clickId: gclid };
