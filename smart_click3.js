@@ -4,33 +4,32 @@ document.addEventListener('DOMContentLoaded', () => {
         const scriptTag = document.querySelector('script[data-origin-url]');
         const originUrl = scriptTag ? scriptTag.getAttribute('data-origin-url') : null;
 
-        // Guardar gclid no localStorage se estiver presente na URL
-        if (urlParams.has('gclid')) {
-            const gclid = urlParams.get('gclid');
-            localStorage.setItem('gclid', gclid);
+        // Se a URL não tiver gclid, limpar do localStorage
+        if (!urlParams.has('gclid')) {
+            localStorage.removeItem('gclid');
+        } else {
+            // Se tiver, armazenar no localStorage
+            localStorage.setItem('gclid', urlParams.get('gclid'));
         }
 
-        // Recuperar gclid do localStorage caso não esteja na URL
-        const gclid = urlParams.get('gclid') || localStorage.getItem('gclid');
+        // Recuperar gclid atualizado
+        const gclid = localStorage.getItem('gclid') || null;
 
-        // Definir o clickId como gclid, wbraid, msclkid ou fbclid (caso existam)
-        const adCampaignId = gclid || urlParams.get('wbraid') || urlParams.get('msclkid') || urlParams.get('fbclid');
-
-        if (originUrl) {
+        // Verifica se há um clickId válido antes de enviar
+        if (gclid && originUrl) {
             const ajaxUrl = `${originUrl}/wp-admin/admin-ajax.php?action=track_click`;
-            const requestBody = adCampaignId ? { clickId: adCampaignId } : {}; // Se não houver gclid, enviar um objeto vazio
+            const data = { clickId: gclid };
 
-            console.log("📡 Enviando requisição AJAX para:", ajaxUrl);
-            console.log("📦 Dados enviados:", requestBody);
+            console.log("📦 Dados enviados:", data); // Debug
 
             fetch(ajaxUrl, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(requestBody),
+                body: JSON.stringify(data),
             })
-            .then(response => response.json())
-            .then(data => console.log("✅ Resposta do servidor:", data))
-            .catch(error => console.error("❌ Erro ao enviar requisição:", error));
+            .catch(error => {
+                console.error('❌ Erro ao enviar requisição:', error);
+            });
         }
     })();
 });
