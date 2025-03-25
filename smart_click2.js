@@ -4,10 +4,6 @@ document.addEventListener('DOMContentLoaded', () => {
 		const scriptTag = document.querySelector('script[data-origin-url]');
 		const originUrl = scriptTag ? scriptTag.getAttribute('data-origin-url') : null;
         
-        // Function to replace spaces with 's', dashes with 'd', and remove slashes
-        const replaceSpacesAndDashes = (inputString) =>
-            inputString.replace(/ /g, 's').replace(/-/g, 'd').replace(/\//g, '');
-
         // Store the gclid in local storage if present in the URL
         if (urlParams.has('gclid')) {
             const gclid = urlParams.get('gclid');
