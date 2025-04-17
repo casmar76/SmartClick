@@ -27,8 +27,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 source: isOrganic ? 'organic' : 'paid'
             };
 
-            console.log("📡 Enviando requisição AJAX para:", ajaxUrl);
-            console.log("📦 Dados enviados:", requestBody);
+            console.log("Enviando requisição AJAX para:", ajaxUrl);
+            console.log("Dados enviados:", requestBody);
 
             fetch(ajaxUrl, {
                 method: 'POST',
@@ -36,10 +36,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 body: JSON.stringify(requestBody),
             })
             .then(response => response.json())
-            .then(data => console.log("✅ Resposta do servidor:", data))
-            .catch(error => console.error("❌ Erro ao enviar requisição:", error));
+            .then(data => console.log("Resposta do servidor:", data))
+            .catch(error => console.error("Erro ao enviar requisição:", error));
         } else {
-            console.log("❌ URL de origem não encontrada.");
+            console.log("URL de origem não encontrada.");
         }
 
         // Criar a string dos parâmetros de URL atualizada
