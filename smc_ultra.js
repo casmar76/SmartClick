@@ -19,28 +19,55 @@ document.addEventListener('DOMContentLoaded', () => {
         // Determinar se o acesso é orgânico
         const isOrganic = !adCampaignId;
 
-        // Enviar dados para o servidor
-        if (originUrl) {
-            const ajaxUrl = `${originUrl}/wp-admin/admin-ajax.php?action=track_click`;
-            const requestBody = { 
-                clickId: adCampaignId || 'organico', // Envia 'organico' se não houver clickId
-                source: isOrganic ? 'organic' : 'paid'
-            };
+        // Pegar a keyword com prioridade entre vários parâmetros
+        const keyword =
+            urlParams.get('keyword') ||
+            urlParams.get('subacc') ||
+            urlParams.get('sub1') ||
+            urlParams.get('subid') ||
+            urlParams.get('affiliateId') ||
+            urlParams.get('s1') ||
+            urlParams.get('id') ||
+            urlParams.get('order_id') ||
+            urlParams.get('aff_sub1') ||
+            '';
 
-            console.log("Enviando requisição AJAX para:", ajaxUrl);
-            console.log("Dados enviados:", requestBody);
+        // Função para enviar os dados
+        function sendClickData(accessSource) {
+            if (originUrl) {
+                const ajaxUrl = `${originUrl}/wp-admin/admin-ajax.php?action=track_click`;
+                const requestBody = {
+                    clickId: adCampaignId || '',
+                    source: isOrganic ? 'organic' : 'paid',
+                    keyword: keyword,
+                    accessSource: accessSource
+                };
 
-            fetch(ajaxUrl, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(requestBody),
-            })
-            .then(response => response.json())
-            .then(data => console.log("Resposta do servidor:", data))
-            .catch(error => console.error("Erro ao enviar requisição:", error));
-        } else {
-            console.log("URL de origem não encontrada.");
+                console.log("Enviando requisição AJAX para:", ajaxUrl);
+                console.log("Dados enviados:", requestBody);
+
+                fetch(ajaxUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(requestBody),
+                })
+                .then(response => response.json())
+                .then(data => console.log("Resposta do servidor:", data))
+                .catch(error => console.error("Erro ao enviar requisição:", error));
+            } else {
+                console.log("URL de origem não encontrada.");
+            }
         }
+
+        // Envio automático ao carregar a página
+        sendClickData('access');
+
+        // Evento para capturar cliques nos <a>
+        document.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                sendClickData('clicked');
+            });
+        });
 
         // Criar a string dos parâmetros de URL atualizada
         const updatedUrlParamsString = urlParams.toString();
